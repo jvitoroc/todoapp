@@ -1,0 +1,24 @@
+import React from "react";
+import Todo from "../Todo/Todo";
+import style from "./style.css";
+
+const Todos = ({todos, changeDescriptionHandler, saveHandler, deleteModeHandler})=>{
+    const todosComponent = todos.map((todo, i)=>{
+        return (
+            <Todo key={i}
+                id={i}
+                todo={todo}
+                changeDescriptionHandler={changeDescriptionHandler}
+                saveHandler={saveHandler}
+                deleteModeHandler={deleteModeHandler}/>
+        )
+    });
+
+    return (
+        <ul className={style.Todos}>
+            {todosComponent}
+        </ul>
+    )
+}
+
+export default Todos;

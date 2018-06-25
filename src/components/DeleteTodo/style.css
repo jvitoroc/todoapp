@@ -1,0 +1,29 @@
+.DeleteTodo{
+    background: rgb(255, 54, 67, 0.6);
+    overflow: hidden;
+    height: 0;
+    animation-name: appear;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.DeleteTodo:not(:last-child){
+    border-bottom: #051A29 1px solid;
+}
+
+.DeleteTodo > button{
+    padding: 10px;
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 1em;
+    background: transparent;
+    color: white;
+    border: none;
+    width: 50%;
+    height: 100%;
+}
+
+@keyframes appear{
+    from{height: 0}
+    to{height: 39px}
+}

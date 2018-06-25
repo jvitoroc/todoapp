@@ -1,0 +1,26 @@
+.TopBar{
+    display: flex;
+    padding: 5px 10px 5px 20px;
+    border-bottom: #051A29 2px solid;
+}
+
+.title{
+    flex-grow: 2;
+    align-self: flex-end;
+    padding-top: 20px;
+}
+
+.title > h2{
+    font-weight: 600;
+    font-family: "Work Sans";
+    font-size: 1.6em;
+    margin: 0;
+}
+
+.add-todo-wrapper{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+}

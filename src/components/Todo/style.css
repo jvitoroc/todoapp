@@ -1,0 +1,65 @@
+.Todo{
+    padding: 10px 0 10px 20px;
+    background: #283643;
+}
+
+.Todo:not(:last-child){
+    border-bottom: #051A29 1px solid;
+}
+
+.checkButton{
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.checkButton > svg{
+    float: right;
+    padding-right: 20px;
+}
+
+.description{
+    flex: 3;
+    font-size: 0.9em;
+    color: #fbfbfb;
+    font-family: "Roboto";
+    user-select: none;
+    overflow: hidden;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+}
+
+.description-input{
+    background: none;
+    border: none;
+    outline: none;
+    color: #99A0A6;
+}
+
+.edit-mode{
+    flex: 0.2;
+}
+
+.edit-mode:global(.active):after{
+    background: #fbfbfb;
+    animation-name: blink;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.edit-mode:after{
+    content: "";
+    display: block;
+    background: #051A29;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+}
+
+@keyframes blink{
+    from{background: #051A29;}
+    to{background: #fbfbfb;}
+}
