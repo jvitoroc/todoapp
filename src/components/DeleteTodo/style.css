@@ -1,10 +1,13 @@
 .DeleteTodo{
-    background: rgb(255, 54, 67, 0.6);
+    background: rgb(255, 54, 67, 0.4);
     overflow: hidden;
     height: 0;
-    animation-name: appear;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
+    transition-property: height;
+    transition-duration: 0.3s;
+}
+
+.DeleteTodo:global(.active){
+    height: 39px;
 }
 
 .DeleteTodo:not(:last-child){
@@ -23,7 +26,6 @@
     height: 100%;
 }
 
-@keyframes appear{
-    from{height: 0}
-    to{height: 39px}
+.DeleteTodo > button:first-child{
+    border-right: #051A29 1px solid;
 }

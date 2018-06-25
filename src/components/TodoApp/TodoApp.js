@@ -3,7 +3,7 @@ import TopBar from "../TopBar/TopBar";
 import Todos from "../Todos/Todos";
 import style from "./style.css";
 
-const TodoApp = ({addTodoHandler, todos, changeDescriptionHandler, saveHandler, deleteModeHandler})=>{
+const TodoApp = ({addTodoHandler, todos, changeDescriptionHandler, saveHandler, deleteModeHandler, deleteTodoHandler, completeTodo})=>{
 
     return (
         <div className={style.wrapper}>
@@ -12,7 +12,9 @@ const TodoApp = ({addTodoHandler, todos, changeDescriptionHandler, saveHandler, 
                 <Todos todos={todos}
                     changeDescriptionHandler={changeDescriptionHandler}
                     saveHandler={saveHandler}
-                    deleteModeHandler={deleteModeHandler}/>
+                    deleteModeHandler={deleteModeHandler}
+                    deleteTodoHandler={deleteTodoHandler}
+                    completeTodo={completeTodo}/>
             </div>
         </div>
     );

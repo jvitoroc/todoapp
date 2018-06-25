@@ -1,14 +1,24 @@
 .Todo{
-    padding: 10px 0 10px 20px;
+    padding: 0 0 0 20px;
     background: #283643;
+    transition: 0.3s;
+}
+
+.Todo:global(.delete-mode){
+    background: rgb(255, 54, 67, 0.4);
 }
 
 .Todo:not(:last-child){
     border-bottom: #051A29 1px solid;
 }
 
+.content > *{
+    padding: 10px 0;
+}
+
 .checkButton{
     justify-content: flex-end;
+    align-self: stretch;
     flex: 1;
 }
 

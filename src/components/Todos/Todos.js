@@ -2,7 +2,7 @@ import React from "react";
 import Todo from "../Todo/Todo";
 import style from "./style.css";
 
-const Todos = ({todos, changeDescriptionHandler, saveHandler, deleteModeHandler})=>{
+const Todos = ({todos, changeDescriptionHandler, saveHandler, deleteModeHandler, deleteTodoHandler, completeTodo})=>{
     const todosComponent = todos.map((todo, i)=>{
         return (
             <Todo key={i}
@@ -10,7 +10,9 @@ const Todos = ({todos, changeDescriptionHandler, saveHandler, deleteModeHandler}
                 todo={todo}
                 changeDescriptionHandler={changeDescriptionHandler}
                 saveHandler={saveHandler}
-                deleteModeHandler={deleteModeHandler}/>
+                deleteModeHandler={deleteModeHandler}
+                deleteTodoHandler={deleteTodoHandler}
+                completeTodo={completeTodo}/>
         )
     });
 
