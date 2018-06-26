@@ -24,7 +24,7 @@ const todos = (state = initialState.todos, action)=>{
     let _todos;
     switch(action.type){
         case ADD_TODO:
-            return [...state.todos, {description: action.description}]
+            return [...todos, {description: action.description}]
         
         case DELETE_TODO:
             return state.todos.filter((todo)=>{
@@ -32,12 +32,12 @@ const todos = (state = initialState.todos, action)=>{
             });
         
         case EDIT_TODO:
-            _todos = [...state.todos];
+            _todos = [...todos];
             _todos[action.id].description = action.description;
             return _todos;
         
         case COMPLETE_TODO:
-            _todos = [...state.todos];
+            _todos = [...todos];
             _todos[action.id].completed = !_todos[action.id].completed;
             return _todos;
         

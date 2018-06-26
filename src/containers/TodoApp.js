@@ -11,37 +11,6 @@ class TodoApp extends Component{
         ]
     }
 
-    changeDescriptionHandler = (id)=>{
-        this.setState(({todos})=>{
-            todos[id].editMode = true;
-            return {todos};
-        });   
-    }
-
-    saveHandler = (e, id)=>{
-        if(e.keyCode === 13){
-            e.persist();
-            this.setState(({todos})=>{
-                todos[id].description = e.target.value;
-                todos[id].editMode = false;
-                return {todos};
-            });
-        }
-    }
-
-    deleteModeHandler = (id, enable = true)=>{
-        this.setState(({todos})=>{
-            if(enable){
-                for(const todo of todos){
-                    if(todo.deleteMode === true && todo.id !== id)
-                        todo.deleteMode = false;
-                }
-            }
-            todos[id].deleteMode = enable;
-            return {todos};
-        });
-    }
-
     deleteTodoHandler = (id)=>{
         this.setState(({todos})=>{
             todos = todos.filter((_, i)=>{

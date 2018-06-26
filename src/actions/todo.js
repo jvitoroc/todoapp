@@ -10,7 +10,7 @@ const addTodo = (description)=>{
     }
 }
 
-const removeTodo = (id)=>{
+const deleteTodo = (id)=>{
     return{
         type: DELETE_TODO,
         id
@@ -38,7 +38,7 @@ export {
     EDIT_TODO,
     COMPLETE_TODO,
     addTodo,
-    removeTodo,
+    deleteTodo,
     editTodo,
     completeTodo
 }

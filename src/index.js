@@ -1,13 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TodoApp from './containers/TodoApp';
+import {render} from 'react-dom';
+import TodoApp from './components/TodoApp/TodoApp';
 import registerServiceWorker from './registerServiceWorker';
 import "./index.css";
-
 import {createStore} from "redux";
+import {Provider} from "react-redux";
 import todoApp from "./reducers/todo";
 
 const store = createStore(todoApp);
 
-ReactDOM.render(<TodoApp />, document.getElementById('root'));
+render(<Provider store={store}><TodoApp/></Provider>, document.getElementById('root'));
 registerServiceWorker();

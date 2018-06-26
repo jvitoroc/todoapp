@@ -10,4 +10,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect({}, mapDispatchToProps)(AddTodo);
+export default connect(null, mapDispatchToProps)(AddTodo);

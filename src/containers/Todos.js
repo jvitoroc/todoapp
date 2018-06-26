@@ -1,6 +1,6 @@
 import Todos from "../components/Todos/Todos";
 import {connect} from "react-redux";
-import {completeTodo} from "../actions/todo";
+import {completeTodo, editTodo, deleteTodo} from "../actions/todo";
 
 const mapStateToProps = state => {
     return {
@@ -12,6 +12,12 @@ const mapDispatchToProps = dispatch => {
     return {
         onTodoClick: id => {
             dispatch(completeTodo(id))
+        },
+        onEditTodo: (id) => {
+            return description => dispatch(editTodo(id, description));
+        },
+        onDeleteTodo: (id) => {
+            dispatch(deleteTodo(id));
         }
     }
 }
