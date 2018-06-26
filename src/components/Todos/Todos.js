@@ -3,11 +3,6 @@ import Todo from "../Todo/Todo";
 import style from "./style.css";
 
 class Todos extends Component{
-    // I didn't put this state in the store because it's all about UI.
-    state = {
-        deleteMode: null,
-        editMode: []
-    }
 
     editModeHandler = (id, enable = true)=>{
         this.setState(({editMode})=>{

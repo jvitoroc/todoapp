@@ -2,6 +2,8 @@ const ADD_TODO = 'ADD_TODO';
 const DELETE_TODO = 'DELETE_TODO';
 const EDIT_TODO = 'EDIT_TODO';
 const COMPLETE_TODO = 'COMPLETE_TODO';
+const TOGGLE_EDIT_MODE = 'TOGGLE_EDIT_MODE';
+const TOGGLE_DELETE_MODE = 'TOGGLE_DELETE_MODE';
 
 const addTodo = (description)=>{
     return{
@@ -32,13 +34,33 @@ const completeTodo = (id)=>{
     }
 }
 
+const toggleEditMode = (id)=>{
+    return{
+        type: TOGGLE_EDIT_MODE,
+        id
+    }
+}
+
+const toggleDeleteMode = (id)=>{
+    return{
+        type: TOGGLE_DELETE_MODE,
+        id
+    }
+}
+
+
+
 export {
     ADD_TODO,
     DELETE_TODO,
     EDIT_TODO,
     COMPLETE_TODO,
+    TOGGLE_EDIT_MODE,
+    TOGGLE_DELETE_MODE,
     addTodo,
     deleteTodo,
     editTodo,
-    completeTodo
-}
+    completeTodo,
+    toggleEditMode,
+    toggleDeleteMode
+};
