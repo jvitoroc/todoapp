@@ -1,5 +1,5 @@
 const ADD_TODO = 'ADD_TODO';
-const REMOVE_TODO = 'REMOVE_TODO';
+const DELETE_TODO = 'DELETE_TODO';
 const EDIT_TODO = 'EDIT_TODO';
 const COMPLETE_TODO = 'COMPLETE_TODO';
 
@@ -12,7 +12,7 @@ const addTodo = (description)=>{
 
 const removeTodo = (id)=>{
     return{
-        type: REMOVE_TODO,
+        type: DELETE_TODO,
         id
     }
 }
@@ -34,7 +34,7 @@ const completeTodo = (id)=>{
 
 export {
     ADD_TODO,
-    REMOVE_TODO,
+    DELETE_TODO,
     EDIT_TODO,
     COMPLETE_TODO,
     addTodo,

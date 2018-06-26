@@ -13,7 +13,7 @@
 //     ]
 // }
 
-import {ADD_TODO, REMOVE_TODO, EDIT_TODO, COMPLETE_TODO} from "../actions/todo";
+import {ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO} from "../actions/todo";
 import {combineReducers} from "redux";
 
 const initialState = {
@@ -26,7 +26,7 @@ const todos = (state = initialState.todos, action)=>{
         case ADD_TODO:
             return [...state.todos, {description: action.description}]
         
-        case REMOVE_TODO:
+        case DELETE_TODO:
             return state.todos.filter((todo)=>{
                 return todo.id !== action.id;
             });
@@ -49,7 +49,7 @@ const todos = (state = initialState.todos, action)=>{
 // for future reducers
 
 const todoApp = combineReducers({
-    todos: todos
+    todos
 })
 
 export default todoApp;
