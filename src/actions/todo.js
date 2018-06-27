@@ -34,11 +34,10 @@ const completeTodo = (id)=>{
     }
 }
 
-const toggleEditMode = (id, off)=>{
+const toggleEditMode = (id)=>{
     return{
         type: TOGGLE_EDIT_MODE,
-        id,
-        off
+        id
     }
 }
 

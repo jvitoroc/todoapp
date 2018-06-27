@@ -1,20 +1,17 @@
 import React, {Component} from "react";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Todo from "../Todo/Todo";
 import style from "./style.css";
 
 class Todos extends Component{
 
     render = ()=>{
-        console.log(this.props);
         const todosComponents = this.props.todos.map((todo, i)=>{
             return (
                 <Todo key={i}
-                    deleteMode={this.props.deleteMode === i}
-                    editMode={this.props.editMode.includes(i)}
                     data={todo}
                     onToggle={()=>this.props.onTodoClick(i)}
                     onEdit={this.props.onEditTodo(i)}
-                    onDelete={()=>this.props.onDeleteTodo(i)}
                     toggleDeleteMode={this.props.toggleDeleteMode}
                     toggleEditMode={this.props.toggleEditMode}/>
             )
@@ -22,7 +19,11 @@ class Todos extends Component{
 
         return (
             <ul className={style.Todos}>
+                <ReactCSSTransitionGroup transitionName="todo-state"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
                 {todosComponents}
+                </ReactCSSTransitionGroup>
             </ul>
         );
     }

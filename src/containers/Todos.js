@@ -1,7 +1,6 @@
 import Todos from "../components/Todos/Todos";
 import {connect} from "react-redux";
-import {completeTodo, editTodo, deleteTodo, toggleDeleteMode, toggleEditMode} from "../actions/todo";
-import {batchActions} from 'redux-batched-actions';
+import {completeTodo, editTodo, toggleDeleteMode, toggleEditMode} from "../actions/todo";
 
 const mapStateToProps = state => {
     return state;
@@ -13,16 +12,13 @@ const mapDispatchToProps = dispatch => {
             dispatch(completeTodo(id));
         },
         onEditTodo: (id) => {
-            return description => dispatch(batchActions([toggleEditMode(id), editTodo(id, description)]))
-        },
-        onDeleteTodo: (id) => {
-            dispatch(batchActions([toggleDeleteMode(), toggleEditMode(id, true), deleteTodo()]));
+            return description => dispatch(editTodo(id, description))
         },
         toggleDeleteMode: (id) =>{
-            return dispatch(toggleDeleteMode(id));
+            dispatch(toggleDeleteMode(id));
         },
         toggleEditMode: (id) =>{
-            return dispatch(toggleEditMode(id));
+            dispatch(toggleEditMode(id));
         },
     }
 }

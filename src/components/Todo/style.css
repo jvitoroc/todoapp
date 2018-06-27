@@ -12,6 +12,16 @@
     border-bottom: #051A29 1px solid;
 }
 
+.Todo:global(.todo-state-enter){
+    overflow: hidden;
+    max-height: 0;
+}
+
+.Todo:global(.todo-state-enter-active){
+    max-height: 200px;
+    transition: max-height 200ms ease-in;
+}
+
 .content > *{
     padding: 10px 0;
 }

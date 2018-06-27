@@ -1,5 +1,6 @@
 .TopBar{
     display: flex;
+    background: #283643;
     padding: 5px 10px 5px 20px;
     border-bottom: #051A29 2px solid;
 }

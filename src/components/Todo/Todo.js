@@ -8,11 +8,11 @@ import DeleteTodo from "../../containers/DeleteTodo";
 class Todo extends Component{
     
     render = ()=> {
-        const {data, onToggle, toggleEditMode, toggleDeleteMode, editMode, deleteMode, onEdit} = this.props;
+        const {data, onToggle, toggleEditMode, toggleDeleteMode, onEdit} = this.props;
         let description = null;
         const checkBoxColor = data.completed ?  "#fbfbfb":"#051A29";
 
-        if(editMode){
+        if(data.editMode){
             const classes = `${style["description-input"]} ${style.description}`
             description = <input type="text"
                             onKeyUp={(e)=>{
@@ -33,8 +33,8 @@ class Todo extends Component{
             );
         };
 
-        const editModeClasses = classnames(style['edit-mode'], {'active': editMode});
-        const todoClasses = classnames(style.Todo, {'delete-mode': deleteMode})
+        const editModeClasses = classnames(style['edit-mode'], {'active': data.editMode});
+        const todoClasses = classnames(style.Todo, {'delete-mode': data.deleteMode})
         return (
             <React.Fragment>
                 <Pressed time={350}
@@ -51,9 +51,9 @@ class Todo extends Component{
                         </div>
                     </li>
                 </Pressed>
-                <DeleteTodo cancelHandler={toggleDeleteMode}
+                <DeleteTodo cancelHandler={()=>toggleDeleteMode(data.id)}
                     id={data.id}
-                    show={deleteMode}/>
+                    show={data.deleteMode}/>
             </React.Fragment>
         );
     }

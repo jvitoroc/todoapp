@@ -1,12 +1,11 @@
 import DeleteTodo from "../components/DeleteTodo/DeleteTodo";
 import {connect} from "react-redux";
-import {deleteTodo, toggleDeleteMode, toggleEditMode} from "../actions/todo";
-import {batchActions} from 'redux-batched-actions';
+import {deleteTodo} from "../actions/todo";
 
 const mapDispatchToProps = dispatch => {
     return {
         onClick: (id)=>{
-            dispatch(batchActions([toggleDeleteMode(id), toggleEditMode(id, true), deleteTodo(id)]));
+            dispatch(deleteTodo(id));
         }
     }
 }

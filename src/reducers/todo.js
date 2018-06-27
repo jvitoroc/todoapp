@@ -17,16 +17,31 @@ import {ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, TOGGLE_DELETE_MODE, TOG
 import {combineReducers} from "redux";
 
 const initialState = {
-    todos: [],
-    deleteMode: null,
-    editMode: []
+    todos: []
+}
+
+let lastId = -1;
+
+// no lodash today
+const whereIndex = (coll, filters)=>{
+    for(const [index, item] of coll.entries()){
+        let match = true;
+        for(const key in filters){
+            if(filters[key] !== item[key])
+                match = false;
+        }
+        if(match)
+            return index;
+    }
+    return -1;
 }
 
 const todos = (state = initialState.todos, action)=>{
     let _todos = null;
+    let index = null;
     switch(action.type){
         case ADD_TODO:
-            return [...state, {description: action.description, id: state.length}]
+            return [...state, {description: action.description, id: ++lastId, deleteMode: false, editMode: false}]
         
         case DELETE_TODO:
             return state.filter((todo)=>{
@@ -34,45 +49,42 @@ const todos = (state = initialState.todos, action)=>{
             });
         
         case EDIT_TODO:
-            _todos = [...state];
-            _todos[action.id].description = action.description;
-            return _todos;
+            index = whereIndex(state, {id: action.id});
+            if(index !== -1){
+                _todos = [...state];
+                _todos[index].description = action.description;
+                _todos[index].editMode = false;
+                return _todos;
+            }
         
         case COMPLETE_TODO:
-            _todos = [...state];
-            _todos[action.id].completed = !_todos[action.id].completed;
-            return _todos;
-        
-        default:
-            return state;
-    }
-}
-
-const editMode = (state = initialState.editMode, action)=>{
-    switch(action.type){
-        case TOGGLE_EDIT_MODE:
-            const index = state.indexOf(action.id);
-            const newState = [...state];
+            index = whereIndex(state, {id: action.id});
             if(index !== -1){
-                newState.splice(index, 1);
-                return newState;
-            }else if(!action.delete){
-                newState.push(action.id);
-                return newState;
+                _todos = [...state];
+                _todos[index].completed = !_todos[index].completed;
+                return _todos;
             }
-            return newState;
-            
-        default:
-            return state;
-    }
-}
+        
+        case TOGGLE_EDIT_MODE:
+            index = whereIndex(state, {id: action.id});
+            if(index !== -1){
+                _todos = [...state];
+                _todos[index].editMode = !_todos[index].editMode;
+                return _todos;
+            }
 
-const deleteMode = (state = initialState.deleteMode, action)=>{
-    switch(action.type){
         case TOGGLE_DELETE_MODE:
-            if(action.id === null || action.id === state)
-                return null;
-            return action.id;
+            index = whereIndex(state, {id: action.id});
+            if(index !== -1){
+                _todos = [...state];
+                _todos[index].deleteMode = !_todos[index].deleteMode;
+                _todos = _todos.map((todo)=>{
+                    if(todo.id !== action.id && todo.deleteMode)
+                        return {...todo, deleteMode: false};
+                    return todo;
+                })
+                return _todos;
+            }
 
         default:
             return state;
@@ -80,11 +92,8 @@ const deleteMode = (state = initialState.deleteMode, action)=>{
 }
 
 // for future reducers
-
 const todoApp = combineReducers({
-    todos,
-    deleteMode,
-    editMode
+    todos
 });
 
 export default todoApp;
