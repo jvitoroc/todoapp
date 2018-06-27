@@ -8,46 +8,51 @@ import DeleteTodo from "../../containers/DeleteTodo";
 class Todo extends Component{
     
     render = ()=> {
-        const {data, editModeHandler, id, deleteModeHandler, deleteMode, editMode, onToggle, onEdit, onDelete} = this.props;
+        const {data, onToggle, toggleEditMode, toggleDeleteMode, editMode, deleteMode, onEdit} = this.props;
         let description = null;
         const checkBoxColor = data.completed ?  "#fbfbfb":"#051A29";
 
         if(editMode){
             const classes = `${style["description-input"]} ${style.description}`
             description = <input type="text"
-                            onKeyUp={(e)=>{e.persist(); onEdit(e.target.value)}}
+                            onKeyUp={(e)=>{
+                                if(e.keyCode !== 13)
+                                    return;
+                                e.persist();
+                                onEdit(e.target.value)
+                            }}
                             autoFocus
                             defaultValue={data.description}
                             className={classes}/>;
         }else{
             description = (
-                <div onDoubleClick={()=>editModeHandler(id)}
+                <div onDoubleClick={()=>toggleEditMode(data.id)}
                     className={style.description}>
                     {data.description}
                 </div>
             );
-        }
-    
+        };
+
         const editModeClasses = classnames(style['edit-mode'], {'active': editMode});
         const todoClasses = classnames(style.Todo, {'delete-mode': deleteMode})
         return (
             <React.Fragment>
                 <Pressed time={350}
-                    handler={()=>deleteModeHandler(id, !deleteMode)}>
+                    handler={()=>toggleDeleteMode(data.id)}>
                     <li className={todoClasses}>
                         <div className={style.content}>
                             <div className={editModeClasses}></div>
                             {description}
                             <div className={style.checkButton}
-                                onClick={()=>{onToggle(id)}}>
+                                onClick={()=>{onToggle(data.id)}}>
                                 <MdDone size={29}
                                     color={checkBoxColor}/>
                             </div>
                         </div>
                     </li>
                 </Pressed>
-                <DeleteTodo deleteHandler={()=>onDelete(id)}
-                    cancelHandler={()=>deleteModeHandler(id, false)}
+                <DeleteTodo cancelHandler={toggleDeleteMode}
+                    id={data.id}
                     show={deleteMode}/>
             </React.Fragment>
         );

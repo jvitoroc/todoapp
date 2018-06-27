@@ -4,41 +4,19 @@ import style from "./style.css";
 
 class Todos extends Component{
 
-    editModeHandler = (id, enable = true)=>{
-        this.setState(({editMode})=>{
-            if(enable)
-                editMode = [...editMode, id];
-            else
-                editMode.splice(editMode.indexOf(id), 1);
-
-            return {editMode};
-        });
-    }
-
-    deleteModeHandler = (id, cancel = false)=>{
-        this.setState(({deleteMode})=>{
-            if(cancel)
-                deleteMode = null;
-            else
-                deleteMode = id;
-
-            return {deleteMode}
-        });
-    }
-
     render = ()=>{
-        const todosComponents = this.todos.map((todo, i)=>{
+        console.log(this.props);
+        const todosComponents = this.props.todos.map((todo, i)=>{
             return (
                 <Todo key={i}
-                    id={i}
-                    deleteMode={this.state.deleteMode === i}
-                    editMode={this.state.editMode.contains(i)}
+                    deleteMode={this.props.deleteMode === i}
+                    editMode={this.props.editMode.includes(i)}
                     data={todo}
-                    onToggle={()=>this.onTodoClick(i)}
-                    onEdit={this.onEditTodo(i)}
-                    onDelete={()=>this.onDeleteTodo(i)}
-                    deleteModeHandler={this.deleteModeHandler}
-                    editModeHandler={this.editModeHandler}/>
+                    onToggle={()=>this.props.onTodoClick(i)}
+                    onEdit={this.props.onEditTodo(i)}
+                    onDelete={()=>this.props.onDeleteTodo(i)}
+                    toggleDeleteMode={this.props.toggleDeleteMode}
+                    toggleEditMode={this.props.toggleEditMode}/>
             )
         });
 

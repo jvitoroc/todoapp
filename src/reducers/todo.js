@@ -23,22 +23,23 @@ const initialState = {
 }
 
 const todos = (state = initialState.todos, action)=>{
+    let _todos = null;
     switch(action.type){
         case ADD_TODO:
-            return [...todos, {description: action.description}]
+            return [...state, {description: action.description, id: state.length}]
         
         case DELETE_TODO:
-            return todos.filter((todo)=>{
+            return state.filter((todo)=>{
                 return todo.id !== action.id;
             });
         
         case EDIT_TODO:
-            _todos = [...todos];
+            _todos = [...state];
             _todos[action.id].description = action.description;
             return _todos;
         
         case COMPLETE_TODO:
-            _todos = [...todos];
+            _todos = [...state];
             _todos[action.id].completed = !_todos[action.id].completed;
             return _todos;
         
@@ -55,11 +56,12 @@ const editMode = (state = initialState.editMode, action)=>{
             if(index !== -1){
                 newState.splice(index, 1);
                 return newState;
-            }else{
-                newState.append(action.id);
+            }else if(!action.delete){
+                newState.push(action.id);
                 return newState;
             }
-
+            return newState;
+            
         default:
             return state;
     }
@@ -68,9 +70,9 @@ const editMode = (state = initialState.editMode, action)=>{
 const deleteMode = (state = initialState.deleteMode, action)=>{
     switch(action.type){
         case TOGGLE_DELETE_MODE:
-            if(action.id)
-                return action.id;
-            return null;
+            if(action.id === null || action.id === state)
+                return null;
+            return action.id;
 
         default:
             return state;

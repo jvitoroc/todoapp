@@ -34,10 +34,11 @@ const completeTodo = (id)=>{
     }
 }
 
-const toggleEditMode = (id)=>{
+const toggleEditMode = (id, off)=>{
     return{
         type: TOGGLE_EDIT_MODE,
-        id
+        id,
+        off
     }
 }
 
@@ -47,8 +48,6 @@ const toggleDeleteMode = (id)=>{
         id
     }
 }
-
-
 
 export {
     ADD_TODO,

@@ -1,24 +1,29 @@
 import Todos from "../components/Todos/Todos";
 import {connect} from "react-redux";
-import {completeTodo, editTodo, deleteTodo} from "../actions/todo";
+import {completeTodo, editTodo, deleteTodo, toggleDeleteMode, toggleEditMode} from "../actions/todo";
+import {batchActions} from 'redux-batched-actions';
 
 const mapStateToProps = state => {
-    return {
-        todos: state.todos
-    }
+    return state;
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onTodoClick: id => {
-            dispatch(completeTodo(id))
+            dispatch(completeTodo(id));
         },
         onEditTodo: (id) => {
-            return description => dispatch(editTodo(id, description));
+            return description => dispatch(batchActions([toggleEditMode(id), editTodo(id, description)]))
         },
         onDeleteTodo: (id) => {
-            dispatch(deleteTodo(id));
-        }
+            dispatch(batchActions([toggleDeleteMode(), toggleEditMode(id, true), deleteTodo()]));
+        },
+        toggleDeleteMode: (id) =>{
+            return dispatch(toggleDeleteMode(id));
+        },
+        toggleEditMode: (id) =>{
+            return dispatch(toggleEditMode(id));
+        },
     }
 }
 

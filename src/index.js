@@ -6,8 +6,9 @@ import "./index.css";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import todoApp from "./reducers/todo";
+import {enableBatching} from 'redux-batched-actions';
 
-const store = createStore(todoApp);
+const store = createStore(enableBatching(todoApp));
 
 render(<Provider store={store}><TodoApp/></Provider>, document.getElementById('root'));
 registerServiceWorker();
