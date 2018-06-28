@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import style from "./style.css";
+import style from "./style.scss";
 import {MdDone} from "react-icons/lib/md";
 import classnames from "classnames";
 import Pressed from "../../helpers/Pressed";

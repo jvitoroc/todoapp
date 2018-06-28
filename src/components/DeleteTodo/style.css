@@ -2,12 +2,11 @@
     background: rgb(255, 54, 67, 0.4);
     overflow: hidden;
     height: 0;
-    transition-property: height;
-    transition-duration: 0.3s;
+    transition: height 200ms ease-out;
 }
 
 .DeleteTodo:global(.active){
-    height: 39px;
+    height: 40px;
 }
 
 .DeleteTodo:not(:last-child){

@@ -3,7 +3,7 @@ import style from "./style.css";
 import classnames from "classnames";
 
 const DeleteTodo = ({onClick, id, show, cancelHandler})=>{
-    const className = classnames(style.DeleteTodo, {active: show});
+    const className = classnames(style.DeleteTodo, {active: show}, 'DeleteTodo');
 
     return (
         <li className={className}>

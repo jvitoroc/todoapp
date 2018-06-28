@@ -2,10 +2,11 @@
     padding: 0 0 0 20px;
     background: #283643;
     transition: 0.3s;
+    height: 50px;
 }
 
 .Todo:global(.delete-mode){
-    background: rgb(255, 54, 67, 0.4);
+    background: rgba(255, 54, 67, 0.4);
 }
 
 .Todo:not(:last-child){
@@ -14,12 +15,23 @@
 
 .Todo:global(.todo-state-enter){
     overflow: hidden;
-    max-height: 0;
+    height: 0;
 }
 
 .Todo:global(.todo-state-enter-active){
-    max-height: 200px;
-    transition: max-height 200ms ease-in;
+    height: 50px;
+    transition: height 200ms ease-in;
+}
+
+.Todo:global(.todo-state-leave),
+.Todo:global(.todo-state-leave) + :global(.DeleteTodo){
+    overflow: hidden;
+}
+
+.Todo:global(.todo-state-leave-active),
+.Todo:global(.todo-state-leave-active) + :global(.DeleteTodo){
+    height: 0px;
+    transition: height 200ms ease-in;
 }
 
 .content > *{

@@ -10,8 +10,8 @@ class Todos extends Component{
             return (
                 <Todo key={i}
                     data={todo}
-                    onToggle={()=>this.props.onTodoClick(i)}
-                    onEdit={this.props.onEditTodo(i)}
+                    onToggle={()=>this.props.onTodoClick(todo.id)}
+                    onEdit={this.props.onEditTodo(todo.id)}
                     toggleDeleteMode={this.props.toggleDeleteMode}
                     toggleEditMode={this.props.toggleEditMode}/>
             )
