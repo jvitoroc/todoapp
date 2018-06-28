@@ -1,47 +1,21 @@
-// {
-//     todos: [
-//         {
-//             text: 'Consider using Redux',
-//             completed: true,
-//             id: 0
-//         },
-//         {
-//             text: 'Keep all state in a single tree',
-//             completed: false,
-//             id: 1
-//         }
-//     ]
-// }
-
 import {ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, TOGGLE_DELETE_MODE, TOGGLE_EDIT_MODE} from "../actions/todo";
+import {whereIndex, removeItem} from "../helpers/utils";
 import {combineReducers} from "redux";
 
 const initialState = {
-    todos: []
+    todos: [],
+    editMode: [],
+    deleteMode: null
 }
 
 let lastId = -1;
-
-// no lodash today
-const whereIndex = (coll, filters)=>{
-    for(const [index, item] of coll.entries()){
-        let match = true;
-        for(const key in filters){
-            if(filters[key] !== item[key])
-                match = false;
-        }
-        if(match)
-            return index;
-    }
-    return -1;
-}
 
 const todos = (state = initialState.todos, action)=>{
     let _todos = null;
     let index = null;
     switch(action.type){
         case ADD_TODO:
-            return [...state, {description: action.description, id: ++lastId, deleteMode: false, editMode: false}]
+            return [...state, {description: action.description, id: ++lastId}]
         
         case DELETE_TODO:
             return state.filter((todo)=>{
@@ -91,9 +65,22 @@ const todos = (state = initialState.todos, action)=>{
     }
 }
 
+const editMode = (state = initialState.editMode, action)=>{
+
+    switch(action.type){
+        case REMOVE_TODO:
+        case TOGGLE_EDIT_MODE:
+            let newState = removeItem(state, action.id);
+            return !newState && action.type !== REMOVE_TODO ? [...state, action.id] : newState;
+
+        default: return state;
+    }
+}
+
 // for future reducers
 const todoApp = combineReducers({
-    todos
+    todos,
+
 });
 
 export default todoApp;
