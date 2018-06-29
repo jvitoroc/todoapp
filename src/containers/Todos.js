@@ -2,9 +2,7 @@ import Todos from "../components/Todos/Todos";
 import {connect} from "react-redux";
 import {completeTodo, editTodo, toggleDeleteMode, toggleEditMode} from "../actions/todo";
 
-const mapStateToProps = state => {
-    return state;
-}
+const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => {
     return {

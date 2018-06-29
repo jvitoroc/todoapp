@@ -3,6 +3,7 @@
     background: #283643;
     transition: 0.3s;
     height: 50px;
+    transition: 200ms ease-in;
 }
 
 .Todo:global(.delete-mode){
@@ -20,7 +21,6 @@
 
 .Todo:global(.todo-state-enter-active){
     height: 50px;
-    transition: height 200ms ease-in;
 }
 
 .Todo:global(.todo-state-leave),
@@ -31,7 +31,6 @@
 .Todo:global(.todo-state-leave-active),
 .Todo:global(.todo-state-leave-active) + :global(.DeleteTodo){
     height: 0px;
-    transition: height 200ms ease-in;
 }
 
 .content > *{

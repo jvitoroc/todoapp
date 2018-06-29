@@ -1,5 +1,4 @@
 import {ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, TOGGLE_DELETE_MODE, TOGGLE_EDIT_MODE} from "../actions/todo";
-import {whereIndex, removeItem} from "../helpers/utils";
 import {combineReducers} from "redux";
 
 const initialState = {
@@ -10,75 +9,65 @@ const initialState = {
 
 let lastId = -1;
 
-const todos = (state = initialState.todos, action)=>{
-    let newState = null;
-    let index = null;
+const todos = (state = initialState, action)=>{
     switch(action.type){
         case ADD_TODO:
-            return [...state, {description: action.description, id: ++lastId}]
+            return {
+                ...state, 
+                todos: [...state.todos, {description: action.description, id: ++lastId}]
+            }
         
         case DELETE_TODO:
-            return state.filter((todo)=>{
-                return todo.id !== action.id;
-            });
+            return {
+                ...state,
+                todos: state.todos.filter((todo)=> todo.id !== action.id),
+                editMode: state.editMode.filter(id => id !== action.id),
+                deleteMode: null
+            }
         
         case EDIT_TODO:
-            index = whereIndex(state, {id: action.id});
-            if(index !== -1){
-                newState = [...state];
-                newState[index].description = action.description;
-                return newState;
+            return {
+                ...state,
+                todos: state.todos.map(todo => {
+                    if(todo.id === action.id) {
+                        const editedTodo = {...todo, description: action.description};
+                        return editedTodo;
+                    }
+                    return todo;
+                }),
+                editMode: state.editMode.filter(id => id !== action.id)
             }
         
         case COMPLETE_TODO:
-            index = whereIndex(state, {id: action.id});
-            if(index !== -1){
-                newState = [...state];
-                newState[index].completed = !newState[index].completed;
-                return newState;
+            return {
+                ...state,
+                todos: state.todos.map(todo => {
+                    if(todo.id === action.id) {
+                        const editedTodo = {...todo, completed: !todo.completed};
+                        return editedTodo;
+                    }
+                    return todo;
+                }),
             }
         
+        case TOGGLE_EDIT_MODE:
+            let editMode = [...state.editMode];
+            if(!editMode.includes(action.id)) editMode.push(action.id);
+            else editMode = editMode.filter(id => id !== action.id);
+            return {
+                ...state,
+                editMode
+            }
+
+        case TOGGLE_DELETE_MODE:
+            return {
+                ...state,
+                deleteMode: state.deleteMode === action.id ? null:action.id
+            }
+
         default:
             return state;
     }
 }
 
-const editMode = (state = initialState.editMode, action)=>{
-    let newState = null;
-    switch(action.type){
-        case TOGGLE_EDIT_MODE:
-            newState = removeItem(state, action.id);
-            return !newState ? [...state, action.id] : newState;
-
-        case DELETE_TODO:
-            newState = removeItem(state, action.id);
-            return !newState ? state : newState;
-        
-        case EDIT_TODO:
-            return removeItem(state, action.id);
-
-        default: return state;
-    }
-}
-
-const deleteMode = (state = initialState.deleteMode, action)=>{
-
-    switch(action.type){
-        case DELETE_TODO:
-            return null;
-    
-        case TOGGLE_DELETE_MODE:
-            return action.id === state ? null:action.id;
-
-        default: return state;
-    }
-}
-
-// for future reducers
-const todoApp = combineReducers({
-    todos,
-    editMode,
-    deleteMode
-});
-
-export default todoApp;
+export default todos;

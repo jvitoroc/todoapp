@@ -22,8 +22,8 @@ class Todos extends Component{
         return (
             <ul className={style.Todos}>
                 <ReactCSSTransitionGroup transitionName="todo-state"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}>
+                    transitionEnterTimeout={200}
+                    transitionLeaveTimeout={200}>
                 {todosComponents}
                 </ReactCSSTransitionGroup>
             </ul>
