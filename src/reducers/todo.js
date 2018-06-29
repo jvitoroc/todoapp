@@ -11,7 +11,7 @@ const initialState = {
 let lastId = -1;
 
 const todos = (state = initialState.todos, action)=>{
-    let _todos = null;
+    let newState = null;
     let index = null;
     switch(action.type){
         case ADD_TODO:
@@ -25,53 +25,50 @@ const todos = (state = initialState.todos, action)=>{
         case EDIT_TODO:
             index = whereIndex(state, {id: action.id});
             if(index !== -1){
-                _todos = [...state];
-                _todos[index].description = action.description;
-                _todos[index].editMode = false;
-                return _todos;
+                newState = [...state];
+                newState[index].description = action.description;
+                return newState;
             }
         
         case COMPLETE_TODO:
             index = whereIndex(state, {id: action.id});
             if(index !== -1){
-                _todos = [...state];
-                _todos[index].completed = !_todos[index].completed;
-                return _todos;
+                newState = [...state];
+                newState[index].completed = !newState[index].completed;
+                return newState;
             }
         
-        case TOGGLE_EDIT_MODE:
-            index = whereIndex(state, {id: action.id});
-            if(index !== -1){
-                _todos = [...state];
-                _todos[index].editMode = !_todos[index].editMode;
-                return _todos;
-            }
-
-        case TOGGLE_DELETE_MODE:
-            index = whereIndex(state, {id: action.id});
-            if(index !== -1){
-                _todos = [...state];
-                _todos[index].deleteMode = !_todos[index].deleteMode;
-                _todos = _todos.map((todo)=>{
-                    if(todo.id !== action.id && todo.deleteMode)
-                        return {...todo, deleteMode: false};
-                    return todo;
-                })
-                return _todos;
-            }
-
         default:
             return state;
     }
 }
 
 const editMode = (state = initialState.editMode, action)=>{
+    let newState = null;
+    switch(action.type){
+        case TOGGLE_EDIT_MODE:
+            newState = removeItem(state, action.id);
+            return !newState ? [...state, action.id] : newState;
+
+        case DELETE_TODO:
+            newState = removeItem(state, action.id);
+            return !newState ? state : newState;
+        
+        case EDIT_TODO:
+            return removeItem(state, action.id);
+
+        default: return state;
+    }
+}
+
+const deleteMode = (state = initialState.deleteMode, action)=>{
 
     switch(action.type){
-        case REMOVE_TODO:
-        case TOGGLE_EDIT_MODE:
-            let newState = removeItem(state, action.id);
-            return !newState && action.type !== REMOVE_TODO ? [...state, action.id] : newState;
+        case DELETE_TODO:
+            return null;
+    
+        case TOGGLE_DELETE_MODE:
+            return action.id === state ? null:action.id;
 
         default: return state;
     }
@@ -80,7 +77,8 @@ const editMode = (state = initialState.editMode, action)=>{
 // for future reducers
 const todoApp = combineReducers({
     todos,
-
+    editMode,
+    deleteMode
 });
 
 export default todoApp;

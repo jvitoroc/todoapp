@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import style from "./style.scss";
+import style from "./style.css";
 import {MdDone} from "react-icons/lib/md";
 import classnames from "classnames";
 import Pressed from "../../helpers/Pressed";
@@ -8,11 +8,11 @@ import DeleteTodo from "../../containers/DeleteTodo";
 class Todo extends Component{
     
     render = ()=> {
-        const {data, onToggle, toggleEditMode, toggleDeleteMode, onEdit} = this.props;
+        const {data, onToggle, toggleEditMode, toggleDeleteMode, deleteMode, editMode, onEdit} = this.props;
         let description = null;
         const checkBoxColor = data.completed ?  "#fbfbfb":"#051A29";
 
-        if(data.editMode){
+        if(editMode){
             const classes = `${style["description-input"]} ${style.description}`
             description = <input type="text"
                             onKeyUp={(e)=>{
@@ -33,8 +33,8 @@ class Todo extends Component{
             );
         };
 
-        const editModeClasses = classnames(style['edit-mode'], {'active': data.editMode});
-        const todoClasses = classnames(style.Todo, {'delete-mode': data.deleteMode})
+        const editModeClasses = classnames(style['edit-mode'], {'active': editMode});
+        const todoClasses = classnames(style.Todo, {'delete-mode': deleteMode})
         return (
             <React.Fragment>
                 <Pressed time={350}
@@ -53,7 +53,7 @@ class Todo extends Component{
                 </Pressed>
                 <DeleteTodo cancelHandler={()=>toggleDeleteMode(data.id)}
                     id={data.id}
-                    show={data.deleteMode}/>
+                    show={deleteMode}/>
             </React.Fragment>
         );
     }
