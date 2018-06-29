@@ -1,5 +1,4 @@
 import {ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, TOGGLE_DELETE_MODE, TOGGLE_EDIT_MODE} from "../actions/todo";
-import {combineReducers} from "redux";
 
 const initialState = {
     todos: [],
