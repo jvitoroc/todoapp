@@ -20,13 +20,13 @@ class Todos extends Component{
         });
 
         return (
-            <ul className={style.Todos}>
-                <ReactCSSTransitionGroup transitionName="todo-state"
-                    transitionEnterTimeout={200}
-                    transitionLeaveTimeout={200}>
-                {todosComponents}
-                </ReactCSSTransitionGroup>
-            </ul>
+            <ReactCSSTransitionGroup component="ul"
+                className={style.Todos}
+                transitionName="todo-state"
+                transitionEnterTimeout={200}
+                transitionLeaveTimeout={200}>
+            {todosComponents}
+            </ReactCSSTransitionGroup>
         );
     }
 }

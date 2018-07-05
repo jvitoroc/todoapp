@@ -3,10 +3,10 @@ import TopBar from "../TopBar/TopBar";
 import Todos from "../../containers/Todos";
 import style from "./style.css";
 
-const TodoApp = ()=>{
+const App = ()=>{
     return (
         <div className={style.wrapper}>
-            <div className={style.TodoApp}>
+            <div className={style.App}>
                 <TopBar/>
                 <Todos/>
             </div>
@@ -14,4 +14,4 @@ const TodoApp = ()=>{
     );
 };
 
-export default TodoApp;
+export default App;

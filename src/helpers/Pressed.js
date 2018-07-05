@@ -1,18 +1,32 @@
 import React from "react";
 
-function Pressed({time, handler, children}){
+function Pressed({time, onSuccess, onFail, children, mouseUp = false}){
     let upped = false;
     
     const child = React.cloneElement(React.Children.only(children), {
         onMouseDown: ()=>{
             upped = false;
             setTimeout(function() {
-                if (!upped)
-                   handler.call(null);
+                if(!mouseUp){
+                    if (!upped)
+                        onSuccess.call(null);
+                    else if(onFail)
+                        onFail.call(null)
+                }else{
+                    upped = true;
+                }
+                
             }, time);
         },
         onMouseUp: ()=>{
-            upped = true;
+            if(!mouseUp)
+                upped = true;
+            else{
+                if(upped)
+                    onSuccess.call(null);
+                else if(onFail)
+                    onFail.call(null)
+            }
         }
     });
 

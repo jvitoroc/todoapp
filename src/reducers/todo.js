@@ -1,4 +1,4 @@
-import {ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, TOGGLE_DELETE_MODE, TOGGLE_EDIT_MODE} from "../actions/todo";
+import {ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_TODO, TOGGLE_DELETE_MODE, TOGGLE_EDIT_MODE} from "../actions/todo";
 
 const initialState = {
     todos: [],
@@ -37,7 +37,7 @@ const todos = (state = initialState, action)=>{
                 editMode: state.editMode.filter(id => id !== action.id)
             }
         
-        case COMPLETE_TODO:
+        case TOGGLE_TODO:
             return {
                 ...state,
                 todos: state.todos.map(todo => {

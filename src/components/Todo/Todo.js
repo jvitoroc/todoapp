@@ -38,7 +38,7 @@ class Todo extends Component{
         return (
             <React.Fragment>
                 <Pressed time={350}
-                    handler={()=>toggleDeleteMode(data.id)}>
+                    onSuccess={()=>toggleDeleteMode(data.id)}>
                     <li className={todoClasses}>
                         <div className={style.content}>
                             <div className={editModeClasses}></div>
