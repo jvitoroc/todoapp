@@ -27,7 +27,7 @@ class AddTodoForm extends Component{
     }
     
     render = ()=> {
-        let classes = classnames(style.AddTodoForm, {'show': this.props.show})
+        let classes = classnames(style.AddTodoForm, {'show': this.props.show});
 
         return (
             <div className={classes}>
