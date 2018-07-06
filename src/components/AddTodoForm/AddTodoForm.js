@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import style from "./style.css";
 import {Form, Text} from "informed";
+import classnames from "classnames";
 
 class AddTodoForm extends Component{
     state = {errors: {description: false}}
@@ -16,20 +17,28 @@ class AddTodoForm extends Component{
         if(!state.invalid){
             this.props.addTodo(state.values.description);
             this.props.changeStateHandler();
+            this.formApi.setValue("description", "");
         }
+    }
+
+    onCancel = ()=>{
+        this.formApi.setValue("description", "");
+        this.props.changeStateHandler();
     }
     
     render = ()=> {
+        let classes = classnames(style.AddTodoForm, {'show': this.props.show})
+
         return (
-            <div className={style.AddTodoForm}>
-                <Form className={style.form} getApi={(api)=>this.formApi = api}>
+            <div className={classes}>
+                <Form autoComplete={'off'} className={style.form} getApi={(api)=>this.formApi = api}>
                     <label className={style.label} htmlFor="description">Todo</label>
                     <Text className={style.text} field="description" id="description" validate={this.validateDescription}/>
                     <div className={style.error}>{this.state.errors.description}</div>
                     <button className={style.button} onClick={this.onSubmit}>
                         Add
                     </button>
-                    <button className={style.button} onClick={this.props.changeStateHandler}>
+                    <button className={style.button} onClick={this.onCancel}>
                         Cancel
                     </button>
                 </Form>

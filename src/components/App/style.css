@@ -2,6 +2,7 @@
     width: 400px;
     border-radius: 5px;
     overflow: hidden;
+    margin-top: 200px;
 }
 
 .wrapper{
@@ -12,5 +13,4 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }

@@ -1,6 +1,8 @@
 .AddTodoForm{
     background: #283643;
+    border-bottom: #051A29 2px solid;
     padding: 15px;
+    display: none;
 }
 
 .AddTodoForm::after{
@@ -14,6 +16,10 @@
     display: block;
     width: 100%;
     margin-bottom: 10px;
+}
+
+.AddTodoForm:global(.show){
+    display: block;
 }
 
 .text{

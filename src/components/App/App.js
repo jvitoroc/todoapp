@@ -7,12 +7,12 @@ import style from "./style.css";
 class App extends Component{
     constructor(props){
         super(props);
-        this.state = {showTodos: true};
+        this.state = {showTodoForm: false};
     }
 
     changeState = ()=>{
-        this.setState(({showTodos})=>{
-            return {showTodos: !showTodos};
+        this.setState(({showTodoForm})=>{
+            return {showTodoForm: !showTodoForm};
         });
     }
 
@@ -21,10 +21,8 @@ class App extends Component{
             <div className={style.wrapper}>
                 <div className={style.App}>
                     <TopBar changeStateHandler={this.changeState}/>
-                        {this.state.showTodos
-                            ? <Todos/>
-                            : <AddTodoForm changeStateHandler={this.changeState}/>
-                        }
+                    <AddTodoForm changeStateHandler={this.changeState} show={this.state.showTodoForm}/>
+                    <Todos/>
                 </div>
             </div>
         );
