@@ -1,0 +1,47 @@
+.AddTodoForm{
+    background: #283643;
+    padding: 15px;
+}
+
+.AddTodoForm::after{
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.AddTodoForm > .form > label,
+.AddTodoForm > .form > input{
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.text{
+    border: none;
+    background: rgb(5, 26, 41, 0.3);
+    color: rgb(153, 160, 166);
+    padding: 5px 10px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.text:-webkit-autofill{
+    background-color: rgb(5, 26, 41, 0.3) !important;
+}
+.button{
+    background:rgb(5, 26, 41, 0.3);
+    border: none;
+    color: rgb(153, 160, 166);
+    float: right;
+    text-transform: uppercase;
+    display: block;
+    font-size: 1em;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.error{
+    color: rgb(255, 54, 67, 0.6);
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}

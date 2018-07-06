@@ -13,7 +13,7 @@ const todos = (state = initialState, action)=>{
         case ADD_TODO:
             return {
                 ...state, 
-                todos: [...state.todos, {description: action.description, id: ++lastId}]
+                todos: [...state.todos, {description: action.description, id: ++lastId, completed: false}]
             }
         
         case DELETE_TODO:

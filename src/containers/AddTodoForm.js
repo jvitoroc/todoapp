@@ -1,10 +1,10 @@
-import AddTodo from "../components/AddTodo/AddTodo";
+import AddTodo from "../components/AddTodoForm/AddTodoForm";
 import {connect} from "react-redux";
 import {addTodo} from "../actions/todo";
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClick: (description)=>{
+        addTodo: (description)=>{
             dispatch(addTodo(description));
         }
     }
