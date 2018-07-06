@@ -9,6 +9,6 @@ const createUser = (data)=>{
     });
 }
 
-export {
+export const user = {
     createUser
 };

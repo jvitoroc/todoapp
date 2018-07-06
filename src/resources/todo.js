@@ -43,7 +43,7 @@ const deleteTodo = (id, token)=>{
     });
 }
 
-export {
+export const todo = {
     getTodos,
     getTodo,
     createTodo,

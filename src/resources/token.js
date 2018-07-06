@@ -20,7 +20,7 @@ const revokeToken = (token)=>{
     });
 }
 
-export {
+export const token = {
     createToken,
     revokeToken
 };
