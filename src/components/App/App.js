@@ -1,28 +1,18 @@
 import React, {Component} from "react";
-import TopBar from "../TopBar/TopBar";
-import AddTodoForm from "../../containers/AddTodoForm";
-import Todos from "../../containers/Todos";
+import {Dashboard, SignIn, SignUp} from "../../routes/";
+import {Route, Switch} from "react-router-dom";
 import style from "./style.css";
 
 class App extends Component{
-    constructor(props){
-        super(props);
-        this.state = {showTodoForm: false};
-    }
-
-    changeState = ()=>{
-        this.setState(({showTodoForm})=>{
-            return {showTodoForm: !showTodoForm};
-        });
-    }
-
     render = ()=>{
         return (
             <div className={style.wrapper}>
                 <div className={style.App}>
-                    <TopBar changeStateHandler={this.changeState}/>
-                    <AddTodoForm changeStateHandler={this.changeState} show={this.state.showTodoForm}/>
-                    <Todos/>
+                    <Switch>
+                        <Route exact path="/" component={Dashboard}/>
+                        <Route exact path="/signup" component={SignUp}/>
+                        <Route exact path="/signin" component={SignIn}/>
+                    </Switch>
                 </div>
             </div>
         );

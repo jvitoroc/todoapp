@@ -1,5 +1,5 @@
 import server from "../axios";
-import {createResource} from "./utils";
+import {createResource} from "../utils";
 
 const createUser = (data)=>{
     return server({
