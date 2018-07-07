@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {Dashboard, SignIn, SignUp} from "../../routes/";
+import {Dashboard} from "../../routes/";
+import SignIn from "../../containers/SignIn";
 import {Route, Switch} from "react-router-dom";
 import style from "./style.css";
 
@@ -10,7 +11,6 @@ class App extends Component{
                 <div className={style.App}>
                     <Switch>
                         <Route exact path="/" component={Dashboard}/>
-                        <Route exact path="/signup" component={SignUp}/>
                         <Route exact path="/signin" component={SignIn}/>
                     </Switch>
                 </div>

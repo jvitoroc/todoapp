@@ -1,22 +1,32 @@
 import { put, takeEvery, call } from 'redux-saga/effects'
+import {LOGIN, LOGOUT, loginSucceeded, loginFailed, logoutSucceeded, logoutFailed} from "../actions/auth";
 import {token} from "../resources/";
 
 function* loginUser({username, password}) {
   try {
     const data = yield call(token.createToken, {username, password})
-    yield put({type: "LOGIN_SUCCEEDED", data})
+    yield put(loginSucceeded(data));
+    console.log(data);
   }catch (error) {
-    yield put({type: "LOGIN_FAILED", error})
+    console.log(error);
+    yield put(loginFailed(error.data, error.status))
   }
 }
 
-function* logoutUser({description}) {
-    yield put({ type: 'ADD_TODO', description})
+function* logoutUser() {
+  try {
+    const data = yield call(token.revokeToken)
+    yield put(logoutSucceeded(data));
+    console.log(data);
+  }catch (error) {
+    console.log(error.data);
+    yield put(logoutFailed(error.data))
   }
+}
 
 function* watchAuth() {
-  yield takeEvery('LOGIN', loginUser)
-  yield takeEvery('LOGOUT', logoutUser)
+  yield takeEvery(LOGIN, loginUser)
+  yield takeEvery(LOGOUT, logoutUser)
 }
 
 export {

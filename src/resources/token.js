@@ -3,7 +3,7 @@ import server from "../axios";
 //auth
 const createToken = (data)=>{
     return server({
-        url: `token`,
+        url: `/token`,
         method: 'post',
         data: {password: data.password},
         params: {
@@ -14,7 +14,7 @@ const createToken = (data)=>{
 
 const revokeToken = (token)=>{
     return server({
-        url: `token`,
+        url: `/token`,
         method: 'delete',
         headers: {Authorization: `Bearer ${token}`}
     });
