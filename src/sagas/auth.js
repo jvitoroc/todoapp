@@ -2,13 +2,13 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import {LOGIN, LOGOUT, loginSucceeded, loginFailed, logoutSucceeded, logoutFailed} from "../actions/auth";
 import {token} from "../resources/";
 
-function* loginUser({username, password}) {
+function* loginUser({username, password, resolve, reject}) {
   try {
     const data = yield call(token.createToken, {username, password})
     yield put(loginSucceeded(data));
-    console.log(data);
+    resolve(data);
   }catch (error) {
-    console.log(error);
+    reject(error);
     yield put(loginFailed(error.data, error.status))
   }
 }
@@ -17,9 +17,7 @@ function* logoutUser() {
   try {
     const data = yield call(token.revokeToken)
     yield put(logoutSucceeded(data));
-    console.log(data);
   }catch (error) {
-    console.log(error.data);
     yield put(logoutFailed(error.data))
   }
 }

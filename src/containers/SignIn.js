@@ -5,7 +5,9 @@ import {login} from "../actions/auth";
 const mapDispatchToProps = dispatch => {
     return {
         login: (username, password)=>{
-            dispatch(login(username, password));
+            return new Promise((resolve, reject)=>{
+                dispatch(login(username, password, resolve, reject));
+            });
         }
     }
 }

@@ -3,16 +3,17 @@ import {render} from 'react-dom';
 import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
 import "./index.css";
-import {createStore, applyMiddleware} from "redux";
+import {createStore, applyMiddleware, combineReducers} from "redux";
 import {Provider} from "react-redux";
 import createSagaMiddleware from 'redux-saga'
 import saga from "./sagas";
 import { BrowserRouter } from 'react-router-dom'
 import todoApp from "./reducers/todo";
+import { reducer as formReducer } from 'redux-form';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
-    todoApp,
+  combineReducers({todos: todoApp, form: formReducer}),
   applyMiddleware(sagaMiddleware)
 );
 sagaMiddleware.run(saga);

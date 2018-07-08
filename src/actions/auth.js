@@ -5,11 +5,13 @@ const LOGOUT = 'LOGOUT';
 const LOGOUT_SUCCEEDED = 'LOGOUT_SUCCEEDED';
 const LOGOUT_FAILED = 'LOGOUT_FAILED';
 
-const login = (username, password)=>{
+const login = (username, password, resolve, reject)=>{
     return{
         type: LOGIN,
         username,
-        password
+        password,
+        resolve,
+        reject
     }
 }
 

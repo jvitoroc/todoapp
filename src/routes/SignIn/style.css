@@ -1,0 +1,11 @@
+.SignIn{
+    background: #283643;
+    padding: 20px;
+}
+
+.SignIn > label,
+.SignIn > input{
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
